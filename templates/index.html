@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title_addon %} - Home{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+  <h1>Welcome to Managify</h1>
+</div>
+<div class="page-body">
+  <p>The local date and time is {{ moment(current_time).format('LLLL') }}.</p>
+  <p>You logged into this app {{ moment(current_time).fromNow(refresh=True) }}.</p>
+</div>
+{% endblock %}
