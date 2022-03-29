@@ -1,24 +1,21 @@
-from flask import Flask
-from flask import request, redirect
+from flask import Flask, render_template
+from flask_bootstrap import Bootstrap
+from flask_moment import Moment
+
+from datetime import datetime
 
 app = Flask(__name__)
+bootstrap = Bootstrap(app)
+moment = Moment(app)
 
 @app.route('/')
 def index():
-    return("<h1>This is a money management app.</h1>")
+    return render_template('index.html', current_time=datetime.utcnow())
 
-@app.route('/user/<name>')
-def greet(name):
-    return(f"<h1>Welcome back, {name}\nMake sure to catch up</h1>")
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
-@app.route('/check')
-def check_user_agent():
-    return f"<h1>Your User Agent is {request.headers.get('User-Agent')}"
-
-@app.route('/bad')
-def bad():
-    return '<h1>Bad Request</h1>', 400
-
-@app.route('/redirect')
-def redirect_func():
-    return redirect('https://www.google.com/search?q=money')
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html')
