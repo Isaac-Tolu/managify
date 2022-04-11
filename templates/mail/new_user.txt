@@ -1,0 +1,3 @@
+Good day, {{ user.username }}
+
+Welcome to Managify.
